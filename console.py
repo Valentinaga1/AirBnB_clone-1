@@ -134,9 +134,17 @@ class HBNBCommand(cmd.Cmd):
             key = arg.split("=")[0]
             value = arg.split("=")[1]
             if value[0] == '"' and value[-1] == '"':
+                for i in range(1, len(value) - 2):
+                    if i == len(value) - 3:
+                        break
+                    if value[i + 1] == '"' and value[i] != "\\":
+                        flag = 1
+                        break
+                if flag == 1:
+                    continue
                 value = value.replace("_", " ")
                 value = value[1:-1]
-
+            else:
                 try:
                     value = int(value)
                 except:
