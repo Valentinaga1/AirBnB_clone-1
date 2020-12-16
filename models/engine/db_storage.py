@@ -47,7 +47,7 @@ class DBStorage:
                 dic_of_objects[key] = value
         elif cls is None:
             # acá guarda clase por clase todas sus filas en caso tal de que
-            # la clase No esté vacía
+            # la clase No esté vacía.
             for cls in classes.values():
                 all_objetcs = self.__session.query(cls).all()
                 for obj in all_objetcs:
