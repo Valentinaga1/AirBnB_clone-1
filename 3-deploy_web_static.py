@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Fabric script that distributes an archive to your web servers, using the
 function do_deploy"""
-from fabric.api import put, run, env
+from fabric.api import put, run, env, local
 from os.path import exists
 from datetime import datetime
 
