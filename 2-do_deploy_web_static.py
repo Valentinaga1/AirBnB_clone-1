@@ -23,8 +23,8 @@ def do_deploy(archive_path):
                                                         file_name_without_ext))
             run("rm -rf {}{}/web_static".format(path, file_name_without_ext))
             run("rm -rf /data/web_static/current")
-            run("ln -s {}{}/ /data/web_static/\
-            current".format(path, file_name_without_ext))
+            run("ln -s {}{}/ /data/web_static/current"
+                .format(path, file_name_without_ext))
             return True
         except Exception:
             return False
