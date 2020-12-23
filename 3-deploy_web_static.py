@@ -16,7 +16,7 @@ def do_pack():
         name_of_file = "versions/web_static_{}.tgz".format(date_of_file)
         local("tar -cvzf {} web_static".format(name_of_file))
         return name_of_file
-    except Exception:
+    except:
         return None
 
 
@@ -39,7 +39,7 @@ def do_deploy(archive_path):
             run("ln -s {}{}/ /data/web_static/current"
                 .format(path, file_name_without_ext))
             return True
-        except Exception:
+        except:
             return False
     else:
         return False
@@ -48,6 +48,6 @@ def do_deploy(archive_path):
 def deploy():
     """Function to distributes an archive to your web servers"""
     path = do_pack()
-    if path:
-        return do_deploy(path)
-    return False
+    if path is None:
+        return False
+    return do_deploy(path)
