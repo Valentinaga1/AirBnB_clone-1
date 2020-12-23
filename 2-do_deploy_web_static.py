@@ -2,8 +2,11 @@
 """Fabric script that distributes an archive to your web servers, using the
 function do_deploy"""
 from fabric.api import put, run, env
+from datetime import datetime
+from os.path import exists
 
 env.hosts = [35.185.80.75, 35.231.48.2]
+
 
 def do_pack():
     """Function to generates a .tgz archive """
@@ -15,9 +18,12 @@ def do_pack():
         return name_of_file
     except Exception:
         return None
-        
+
+
 def do_deploy(archive_path):
     """Function to distributes an archive to your web servers"""
+    if exists(archive_path) is False:
+        return False
     try:
         put(archive_path, "/tmp/")
         file_name = frase.split("/")[-1]
