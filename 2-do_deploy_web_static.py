@@ -13,10 +13,10 @@ def do_deploy(archive_path):
     if exists(archive_path) is False:
         return False
     try:
-        put(archive_path, "/tmp/")
-        file_name = frase.split("/")[-1]
+        file_name = archive_path.split("/")[-1]
         file_name_without_ext = file_name.split(".")[0]
         path = "/data/web_static/releases/"
+        put(archive_path, "/tmp/")
         run("mkdir -p {}{}/".format(path, file_name_without_ext))
         run("tar -xzf /tmp/{} -C {}{}/".format(file_name, path,
                                                file_name_without_ext))
