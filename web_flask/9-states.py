@@ -3,6 +3,7 @@
 """
 from flask import Flask, render_template
 from models import storage
+from models.state import State
 
 app = Flask(__name__)
 
@@ -16,22 +17,23 @@ def handle_teardown(self):
 @app.route("/states", strict_slashes=False)
 def list_of_states():
     """Function"""
-    states = storage.all('State').values()
+    states = storage.all(State).values()
     return render_template(
         "9-states.html", states=states, condition="states_list")
 
 
 @app.route("/states<id>", strict_slashes=False)
-def list_of_states_id():
+def list_of_states_id(id):
     """Function"""
-    state_all = storage.all('State')
-    try:
-        state_id = state_all[id]
+    states= storage.all(State)
+    state_id = states[id]
+    if state_id:
         return render_template(
             "9-states.html", state_id=state_id, condition="state_id")
-    except Exception:
+    else:
         return render_template(
             "9-states.html", condition="not_found")
+
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@
 """
 from flask import Flask, render_template
 from models import storage
+from models.state import State
 
 app = Flask(__name__)
 
@@ -16,7 +17,7 @@ def handle_teardown(self):
 @app.route("/cities_by_states", strict_slashes=False)
 def list_of_states():
     """Function"""
-    states = storage.all('State').values()
+    states = storage.all(State).values()
     return render_template("8-cities_by_states.html", states=states)
 
 
